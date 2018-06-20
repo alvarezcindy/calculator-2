@@ -15,8 +15,13 @@ while True:
         break
 
     operator = token[0]
+    numbers = "".join(token[1:])
 
-    float_list = (float(i) for i in token[1:])
+    if numbers.isdigit():
+        float_list = [float(i) for i in token[1:]]
+    else:
+        print("Please input an operator and at least one number")
+        continue
 
     if operator == "pow":
         answer = reduce(power, float_list)
