@@ -41,5 +41,5 @@ while True:
         answer = reduce(mod, float_list)
     else:
         print("Please input an operator and at least one number")
-    print(answer)
+    print(round(answer, 2))
 print("Quitting...")
