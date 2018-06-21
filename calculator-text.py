@@ -7,13 +7,12 @@ calculator program yourself in this file.
 from arithmetic import *
 from functools import reduce
 
-math_file = open("calculation_inputs.txt")
-
+math_file = open("inputs.txt")
 
 def calculate(math_file):
+    ans_list = []
     for line in math_file:
         line = line.rstrip()
-        print("input:", line)
         token = line.split(" ")
 
         operator = token[0]
@@ -22,7 +21,6 @@ def calculate(math_file):
         if numbers.isdigit():
             float_list = [float(i) for i in token[1:]]
         else:
-            print("Invalid inputs!\n")
             continue
 
         if operator == "pow":
@@ -42,8 +40,18 @@ def calculate(math_file):
         elif operator == 'mod':
             answer = reduce(mod, float_list)
         else:
-            print("Invalid inputs in file!\n")
-        print("answer:", round(answer, 2), "\n")
+            continue
+
+        ans_str = round(answer, 2)
+        ans_list.append(ans_str)
+    return ans_list
 
 
-calculate(math_file)
+def calc_outputs(ans_list):
+    with open("outputs.txt", 'w') as f:
+        for item in ans_list:
+            f.write("{}\n".format(str(item)))
+
+
+calc_list = calculate(math_file)
+calc_outputs(calc_list)
